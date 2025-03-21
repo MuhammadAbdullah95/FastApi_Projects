@@ -3,7 +3,9 @@ from dotenv import load_dotenv
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
-
+from psycopg.rows import dict_row
+from sqlalchemy.orm import Session
+import psycopg
 load_dotenv()
 
 user = os.getenv("user")
@@ -26,3 +28,24 @@ def get_db():
         yield db
     finally:
         db.close()
+
+
+# db_user = os.getenv("user")
+# database = os.getenv("dbname")
+# password = os.getenv("password")
+# host = os.getenv("host")
+
+
+# try:
+#     conn = psycopg.connect(
+#         host=host,
+#         dbname=database,
+#         user=db_user,
+#         password=password,
+#         # cursor_factory=RealDictCursor,
+#         row_factory=dict_row,
+#     )
+#     cursor = conn.cursor()
+#     print("Database Connection established")
+# except Exception as error:
+#     print("Error while connecting to the database", error)
